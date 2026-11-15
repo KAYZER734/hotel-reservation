@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>اضافه کردن مدیر</title>
+</head>
+
+<body>
+
+    <h1>اضافه کردن مدیر به هتل {{ view.hotel.name }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            ثبت مدیر جدید
+        </button>
+    </form>
+
+    <br>
+
+    <a href="{% url 'hotels:hotel_admins' view.hotel.pk %}">
+        بازگشت به فهرست مدیران
+    </a>
+
+</body>
+</html>

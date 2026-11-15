@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت درخواست‌های هتل</title>
+</head>
+<body>
+
+    <h1>مدیریت درخواست‌های ثبت هتل</h1>
+
+    {% for item in requests %}
+
+        <div>
+
+            <h3>{{ item.name }}</h3>
+
+            <p>شهر: {{ item.city }}</p>
+
+            <p>درخواست‌دهنده: {{ item.submitted_by }}</p>
+
+            <p>
+                وضعیت:
+                {{ item.get_status_display }}
+            </p>
+
+            <a href="{% url 'hotels:request_detail' item.pk %}">
+                مشاهده جزئیات
+            </a>
+
+            {% if item.status == 'pending' %}
+
+                <form method="post"
+                      action="{% url 'hotels:review_request' item.pk %}">
+
+                    {% csrf_token %}
+
+                    <label>توضیحات مدیر کل:</label>
+
+                    <textarea name="admin_note"></textarea>
+
+                    <button type="submit" name="action" value="approve">
+                        تأیید درخواست
+                    </button>
+
+                    <button type="submit" name="action" value="reject">
+                        رد درخواست
+                    </button>
+
+                </form>
+
+            {% endif %}
+
+        </div>
+
+        <hr>
+
+    {% empty %}
+
+        <p>هیچ درخواستی ثبت نشده است.</p>
+
+    {% endfor %}
+
+</body>
+</html>

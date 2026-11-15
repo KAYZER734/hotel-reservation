@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>فهرست هتل‌ها</title>
+</head>
+<body>
+
+    <h1>فهرست هتل‌ها</h1>
+
+    <!-- فرم جست‌وجو و فیلتر -->
+    <form method="GET">
+
+        <!-- کادر جست‌وجو -->
+        <input
+            type="text"
+            name="q"
+            placeholder="نام هتل یا عبارت موردنظر..."
+            value="{{ search_query }}"
+        >
+
+        <!-- فیلتر شهر -->
+        <select name="city">
+
+            <option value="">همه شهرها</option>
+
+            {% for city in cities %}
+                <option
+                    value="{{ city }}"
+                    {% if selected_city == city %}selected{% endif %}
+                >
+                    {{ city }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">جست‌وجو</button>
+
+        <a href="{% url 'hotels:hotel_list' %}">
+            حذف فیلترها
+        </a>
+
+    </form>
+
+    <hr>
+
+    <!-- نمایش هتل‌ها -->
+    {% for hotel in hotels %}
+
+        <div>
+            <h2>{{ hotel.name }}</h2>
+
+            <p>شهر: {{ hotel.city }}</p>
+
+            <p>{{ hotel.address }}</p>
+
+            <a href="{% url 'hotels:hotel_detail' hotel.pk %}">
+                مشاهده جزئیات
+            </a>
+        </div>
+
+        <hr>
+
+    {% empty %}
+
+        <p>هیچ هتلی با مشخصات موردنظر پیدا نشد.</p>
+
+    {% endfor %}
+
+</body>
+</html>

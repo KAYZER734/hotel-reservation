@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>مدیران هتل</title>
+</head>
+
+<body>
+
+    <h1>مدیران هتل {{ hotel.name }}</h1>
+
+    <a href="{% url 'hotels:hotel_admin_add' hotel.pk %}">
+        اضافه کردن مدیر جدید
+    </a>
+
+    <hr>
+
+    {% if hotel_admins %}
+
+        <h3>فهرست مدیران:</h3>
+
+        {% for admin in hotel_admins %}
+
+            <div>
+                <p>نام کاربری: {{ admin.user.username }}</p>
+                <p>ایمیل: {{ admin.user.email }}</p>
+                <p>تاریخ اضافه شدن: {{ admin.assigned_at }}</p>
+
+                {% if admin.is_active %}
+                    <p>وضعیت: فعال</p>
+                {% else %}
+                    <p>وضعیت: غیرفعال</p>
+                {% endif %}
+
+                <a href="{% url 'hotels:hotel_admin_delete' hotel.pk admin.pk %}">
+                    حذف دسترسی مدیریتی
+                </a>
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>مدیری برای این هتل ثبت نشده است.</p>
+
+    {% endif %}
+
+    <a href="{% url 'hotels:hotel_detail' hotel.pk %}">
+        بازگشت به جزئیات هتل
+    </a>
+
+</body>
+</html>
