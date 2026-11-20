@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت کد تخفیف</title>
+</head>
+
+<body>
+
+    {% if object %}
+        <h2>ویرایش کد تخفیف</h2>
+    {% else %}
+        <h2>تعریف کد تخفیف جدید</h2>
+    {% endif %}
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            ذخیره
+        </button>
+
+    </form>
+
+</body>
+</html>

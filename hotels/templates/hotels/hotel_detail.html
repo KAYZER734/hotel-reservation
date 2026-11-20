@@ -3,54 +3,28 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>{{ hotel.name }}</title>
+    <title>جزئیات هتل</title>
 </head>
 <body>
 
-    <a href="{% url 'hotels:hotel_update' hotel.pk %}">
-    ویرایش اطلاعات هتل
+    <h2>{{ hotel.name }}</h2>
+
+    <p>شهر: {{ hotel.city }}</p>
+
+    <p>آدرس: {{ hotel.address }}</p>
+
+    <p>توضیحات: {{ hotel.description }}</p>
+
+    <p>تاریخ ثبت: {{ hotel.created_at }}</p>
+
+    <hr>
+
+    <a href="{% url 'reviews:review_list' hotel.pk %}">
+        مشاهده نظرات مشتریان
     </a>
-
-    <a href="{% url 'hotels:hotel_update' hotel.pk %}">
-    ویرایش اطلاعات هتل
-    </a>
-
-    <br><br>
-
-    <a href="{% url 'hotels:hotel_delete' hotel.pk %}">
-        حذف هتل
-    </a>
-
-    <br><br>
-
-    <a href="{% url 'hotels:hotel_admins' hotel.pk %}">
-        مدیریت مدیران هتل
-    </a>
-
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-
-    <h1>{{ hotel.name }}</h1>
-
-    <p>
-        شهر: {{ hotel.city }}
-    </p>
-
-    <p>
-        آدرس: {{ hotel.address }}
-    </p>
-
-    <h3>توضیحات هتل:</h3>
-
-    <p>
-        {{ hotel.description|default:"توضیحاتی ثبت نشده است." }}
-    </p>
 
     <a href="{% url 'hotels:hotel_list' %}">
-        بازگشت به فهرست هتل‌ها
+        بازگشت به فهرست هتل ها
     </a>
 
 </body>

@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>درخواست های من</title>
+</head>
+<body>
+
+    <h2>درخواست های ثبت هتل من</h2>
+
+    {% for item in requests %}
+
+        <hr>
+
+        <p>نام هتل: {{ item.name }}</p>
+
+        <p>شهر: {{ item.city }}</p>
+
+        <p>تاریخ ثبت: {{ item.created_at }}</p>
+
+        <p>وضعیت: {{ item.get_status_display }}</p>
+
+        <p>توضیحات مدیر کل: {{ item.admin_note }}</p>
+
+    {% empty %}
+
+        <p>شما هنوز درخواستی ثبت نکرده اید.</p>
+
+    {% endfor %}
+
+</body>
+</html>

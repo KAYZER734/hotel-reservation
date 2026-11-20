@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جزئیات اتاق</title>
+</head>
+<body>
+
+    <h2>{{ room.title }}</h2>
+
+    <p>نام هتل: {{ room.hotel.name }}</p>
+
+    <p>شهر: {{ room.hotel.city }}</p>
+
+    <p>ظرفیت: {{ room.capacity }} نفر</p>
+
+    <p>قیمت هر شب: {{ room.price_per_night }}</p>
+
+    <p>امکانات: {{ room.features }}</p>
+
+    <p>تعداد کل اتاق ها: {{ room.quantity }}</p>
+
+    <a href="{% url 'rooms:room_update' room.pk %}">
+        ویرایش اتاق
+    </a>
+
+    <br>
+
+    <a href="{% url 'rooms:room_delete' room.pk %}">
+        حذف اتاق
+    </a>
+
+    <br>
+
+    <a href="{% url 'rooms:room_list' %}">
+        بازگشت به فهرست
+    </a>
+
+</body>
+</html>

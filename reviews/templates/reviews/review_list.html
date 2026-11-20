@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نظرات هتل</title>
+</head>
+<body>
+
+    <h2>نظرات هتل {{ hotel.name }}</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <a href="{% url 'reviews:review_create' hotel.pk %}">
+        ثبت نظر برای این هتل
+    </a>
+
+    <hr>
+
+    {% for review in reviews %}
+
+        <div>
+            <h3>{{ review.user.username }}</h3>
+
+            <p>امتیاز: {{ review.rating }} از ۵</p>
+
+            <p>{{ review.comment }}</p>
+
+            <small>{{ review.created_at }}</small>
+
+            {% if user == review.user %}
+                <br>
+
+                <a href="{% url 'reviews:review_update' review.pk %}">
+                    ویرایش نظر
+                </a>
+
+                |
+
+                <a href="{% url 'reviews:review_delete' review.pk %}">
+                    حذف نظر
+                </a>
+            {% endif %}
+
+        </div>
+
+        <hr>
+
+    {% empty %}
+
+        <p>هنوز نظری برای این هتل ثبت نشده است.</p>
+
+    {% endfor %}
+
+</body>
+</html>

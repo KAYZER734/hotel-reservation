@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>کدهای تخفیف</title>
+</head>
+
+<body>
+
+    <h2>کدهای تخفیف هتل {{ hotel.name }}</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <a href="{% url 'discounts:discount_create' hotel.pk %}">
+        تعریف کد تخفیف جدید
+    </a>
+
+    <hr>
+
+    {% for discount in discounts %}
+
+        <div>
+
+            <h3>{{ discount.code }}</h3>
+
+            <p>
+                نوع تخفیف:
+                {{ discount.get_discount_type_display }}
+            </p>
+
+            <p>
+                مقدار تخفیف:
+                {{ discount.value }}
+            </p>
+
+            <p>
+                شروع اعتبار:
+                {{ discount.valid_from }}
+            </p>
+
+            <p>
+                پایان اعتبار:
+                {{ discount.valid_until }}
+            </p>
+
+            <p>
+                تعداد استفاده‌شده:
+                {{ discount.used_count }}
+            </p>
+
+            <p>
+                محدودیت استفاده:
+                {{ discount.usage_limit|default:"نامحدود" }}
+            </p>
+
+            <p>
+                وضعیت:
+                {% if discount.is_active %}
+                    فعال
+                {% else %}
+                    غیرفعال
+                {% endif %}
+            </p>
+
+            <a href="{% url 'discounts:discount_update' hotel.pk discount.pk %}">
+                ویرایش
+            </a>
+
+            |
+
+            <a href="{% url 'discounts:discount_delete' hotel.pk discount.pk %}">
+                حذف
+            </a>
+
+        </div>
+
+        <hr>
+
+    {% empty %}
+
+        <p>هنوز کد تخفیفی برای این هتل تعریف نشده است.</p>
+
+    {% endfor %}
+
+</body>
+</html>

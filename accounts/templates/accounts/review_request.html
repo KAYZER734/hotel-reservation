@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>بررسی درخواست</title>
+</head>
+<body>
+
+    <h2>بررسی درخواست مدیریت هتل</h2>
+
+    <p>کاربر: {{ object.user.username }}</p>
+
+    <p>هتل: {{ object.hotel.name }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ثبت نتیجه بررسی</button>
+    </form>
+
+</body>
+</html>

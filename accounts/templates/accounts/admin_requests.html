@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت درخواست ها</title>
+</head>
+<body>
+
+    <h2>درخواست های مدیریت هتل</h2>
+
+    {% for item in requests %}
+
+        <hr>
+
+        <p>درخواست دهنده: {{ item.user.username }}</p>
+
+        <p>نام هتل: {{ item.hotel.name }}</p>
+
+        <p>وضعیت: {{ item.get_status_display }}</p>
+
+        <p>تاریخ ثبت: {{ item.created_at }}</p>
+
+        {% if item.status == 'pending' %}
+
+            <a href="{% url 'accounts:review_request' item.pk %}">
+                بررسی درخواست
+            </a>
+
+        {% endif %}
+
+    {% empty %}
+
+        <p>درخواستی وجود ندارد.</p>
+
+    {% endfor %}
+
+</body>
+</html>

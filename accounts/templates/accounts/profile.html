@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>پروفایل</title>
+</head>
+<body>
+
+    <h2>پروفایل کاربر</h2>
+
+    <p>نام کاربری: {{ request.user.username }}</p>
+
+    <p>نام: {{ request.user.first_name }}</p>
+
+    <p>نام خانوادگی: {{ request.user.last_name }}</p>
+
+    <p>ایمیل: {{ request.user.email }}</p>
+
+    <p>شماره تلفن: {{ request.user.phone_number }}</p>
+
+    <a href="{% url 'accounts:profile_edit' %}">
+        ویرایش پروفایل
+    </a>
+
+    <br>
+
+    <a href="{% url 'accounts:hotel_admin_request' %}">
+        درخواست مدیریت هتل
+    </a>
+
+    <br>
+
+    <a href="{% url 'accounts:my_requests' %}">
+        درخواست های من
+    </a>
+
+    <br>
+
+    <form method="post" action="{% url 'accounts:logout' %}">
+        {% csrf_token %}
+        <button type="submit">خروج</button>
+    </form>
+
+</body>
+</html>

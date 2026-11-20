@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>رزروهای هتل</title>
+</head>
+<body>
+
+    <h2>رزروهای هتل</h2>
+
+    {% for booking in bookings %}
+
+        <hr>
+
+        <h3>{{ booking.room_type.title }}</h3>
+
+        <p>مشتری: {{ booking.user.username }}</p>
+
+        <p>تاریخ ورود: {{ booking.check_in }}</p>
+
+        <p>تاریخ خروج: {{ booking.check_out }}</p>
+
+        <p>تعداد مهمان‌ها: {{ booking.guests }}</p>
+
+        <p>تعداد اتاق‌ها: {{ booking.rooms_count }}</p>
+
+        <p>مبلغ کل: {{ booking.total_price }}</p>
+
+        <p>وضعیت: {{ booking.get_status_display }}</p>
+
+        <a href="{% url 'bookings:booking_status_update' hotel_pk=booking.room_type.hotel_id pk=booking.pk %}">
+            تغییر وضعیت رزرو
+        </a>
+
+    {% empty %}
+
+        <p>هنوز رزروی برای این هتل ثبت نشده است.</p>
+
+    {% endfor %}
+
+</body>
+</html>

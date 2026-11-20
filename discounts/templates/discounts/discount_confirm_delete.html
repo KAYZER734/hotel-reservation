@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>حذف کد تخفیف</title>
+</head>
+
+<body>
+
+    <h2>حذف کد تخفیف</h2>
+
+    <p>
+        آیا از حذف کد تخفیف
+        {{ object.code }}
+        اطمینان دارید؟
+    </p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            بله، حذف شود
+        </button>
+
+        <a href="{% url 'discounts:discount_list' hotel_pk=hotel_pk %}">
+            انصراف
+        </a>
+
+    </form>
+
+</body>
+</html>

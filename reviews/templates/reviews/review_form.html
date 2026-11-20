@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت یا ویرایش نظر</title>
+</head>
+<body>
+
+    {% if object %}
+        <h2>ویرایش نظر</h2>
+    {% else %}
+        <h2>ثبت نظر جدید</h2>
+    {% endif %}
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ذخیره</button>
+
+    </form>
+
+</body>
+</html>

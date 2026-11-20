@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت درخواست هتل</title>
+</head>
+<body>
+
+    <h2>ثبت درخواست ایجاد هتل</h2>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            ارسال درخواست
+        </button>
+
+    </form>
+
+    <a href="{% url 'hotels:hotel_list' %}">
+        بازگشت
+    </a>
+
+</body>
+</html>

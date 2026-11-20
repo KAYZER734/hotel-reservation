@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>فهرست اتاق ها</title>
+</head>
+<body>
+
+    <h2>فهرست انواع اتاق</h2>
+
+    <a href="{% url 'rooms:room_search' %}">
+        جست وجوی اتاق
+    </a>
+
+    {% for room in rooms %}
+
+        <hr>
+
+        <h3>{{ room.title }}</h3>
+
+        <p>هتل: {{ room.hotel.name }}</p>
+
+        <p>شهر: {{ room.hotel.city }}</p>
+
+        <p>ظرفیت: {{ room.capacity }} نفر</p>
+
+        <p>قیمت هر شب: {{ room.price_per_night }}</p>
+
+        <p>تعداد کل: {{ room.quantity }}</p>
+
+        <a href="{% url 'rooms:room_detail' room.pk %}">
+            مشاهده جزئیات
+        </a>
+
+    {% empty %}
+
+        <p>اتاقی ثبت نشده است.</p>
+
+    {% endfor %}
+
+</body>
+</html>

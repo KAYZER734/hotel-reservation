@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جزئیات رزرو</title>
+</head>
+<body>
+
+    <h2>جزئیات رزرو</h2>
+
+    <p>نام مشتری: {{ booking.user.username }}</p>
+
+    <p>نام هتل: {{ booking.room_type.hotel.name }}</p>
+
+    <p>نوع اتاق: {{ booking.room_type.title }}</p>
+
+    <p>تاریخ ورود: {{ booking.check_in }}</p>
+
+    <p>تاریخ خروج: {{ booking.check_out }}</p>
+
+    <p>تعداد مهمان‌ها: {{ booking.guests }}</p>
+
+    <p>تعداد اتاق‌ها: {{ booking.rooms_count }}</p>
+
+    <p>مبلغ کل: {{ booking.total_price }}</p>
+
+    <p>وضعیت رزرو: {{ booking.get_status_display }}</p>
+
+    {% if booking.status == 'pending' or booking.status == 'confirmed' %}
+
+        <form method="post"
+              action="{% url 'bookings:booking_cancel' booking.pk %}">
+
+            {% csrf_token %}
+
+            <button type="submit">لغو رزرو</button>
+
+        </form>
+
+    {% endif %}
+
+    <a href="{% url 'bookings:my_bookings' %}">
+        بازگشت به رزروهای من
+    </a>
+
+</body>
+</html>

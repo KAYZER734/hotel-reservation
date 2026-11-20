@@ -3,71 +3,37 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>فهرست هتل‌ها</title>
+    <title>فهرست هتل ها</title>
 </head>
 <body>
 
-    <h1>فهرست هتل‌ها</h1>
+    <h2>فهرست هتل ها</h2>
 
-    <!-- فرم جست‌وجو و فیلتر -->
-    <form method="GET">
-
-        <!-- کادر جست‌وجو -->
-        <input
-            type="text"
-            name="q"
-            placeholder="نام هتل یا عبارت موردنظر..."
-            value="{{ search_query }}"
-        >
-
-        <!-- فیلتر شهر -->
-        <select name="city">
-
-            <option value="">همه شهرها</option>
-
-            {% for city in cities %}
-                <option
-                    value="{{ city }}"
-                    {% if selected_city == city %}selected{% endif %}
-                >
-                    {{ city }}
-                </option>
-            {% endfor %}
-
-        </select>
-
-        <button type="submit">جست‌وجو</button>
-
-        <a href="{% url 'hotels:hotel_list' %}">
-            حذف فیلترها
-        </a>
-
-    </form>
-
-    <hr>
-
-    <!-- نمایش هتل‌ها -->
     {% for hotel in hotels %}
-
-        <div>
-            <h2>{{ hotel.name }}</h2>
-
-            <p>شهر: {{ hotel.city }}</p>
-
-            <p>{{ hotel.address }}</p>
-
-            <a href="{% url 'hotels:hotel_detail' hotel.pk %}">
-                مشاهده جزئیات
-            </a>
-        </div>
 
         <hr>
 
+        <h3>{{ hotel.name }}</h3>
+
+        <p>شهر: {{ hotel.city }}</p>
+
+        <p>{{ hotel.description }}</p>
+
+        <a href="{% url 'hotels:hotel_detail' hotel.pk %}">
+            مشاهده جزئیات
+        </a>
+
     {% empty %}
 
-        <p>هیچ هتلی با مشخصات موردنظر پیدا نشد.</p>
+        <p>هنوز هتلی ثبت نشده است.</p>
 
     {% endfor %}
+
+    <br>
+
+    <a href="{% url 'hotels:hotel_request' %}">
+        ثبت درخواست ایجاد هتل
+    </a>
 
 </body>
 </html>

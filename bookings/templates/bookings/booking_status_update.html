@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تغییر وضعیت رزرو</title>
+</head>
+<body>
+
+    <h2>تغییر وضعیت رزرو</h2>
+
+    <p>مشتری: {{ booking.user.username }}</p>
+
+    <p>هتل: {{ booking.room_type.hotel.name }}</p>
+
+    <p>نوع اتاق: {{ booking.room_type.title }}</p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ذخیره تغییرات</button>
+
+    </form>
+
+</body>
+</html>

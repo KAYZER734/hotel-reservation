@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت نام</title>
+</head>
+<body>
+
+    <h2>ثبت نام در سامانه</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ثبت نام</button>
+    </form>
+
+    <a href="{% url 'accounts:login' %}">
+        ورود به حساب کاربری
+    </a>
+
+</body>
+</html>

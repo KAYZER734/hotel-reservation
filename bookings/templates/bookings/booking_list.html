@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>رزروهای من</title>
+</head>
+<body>
+
+    <h2>رزروهای من</h2>
+
+    {% for booking in bookings %}
+
+        <hr>
+
+        <h3>{{ booking.room_type.title }}</h3>
+
+        <p>هتل: {{ booking.room_type.hotel.name }}</p>
+
+        <p>تاریخ ورود: {{ booking.check_in }}</p>
+
+        <p>تاریخ خروج: {{ booking.check_out }}</p>
+
+        <p>تعداد مهمان‌ها: {{ booking.guests }}</p>
+
+        <p>تعداد اتاق‌ها: {{ booking.rooms_count }}</p>
+
+        <p>مبلغ کل: {{ booking.total_price }}</p>
+
+        <p>وضعیت: {{ booking.get_status_display }}</p>
+
+        <a href="{% url 'bookings:booking_detail' booking.pk %}">
+            مشاهده جزئیات
+        </a>
+
+    {% empty %}
+
+        <p>هنوز رزروی ثبت نکرده‌اید.</p>
+
+    {% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>درخواست های من</title>
+</head>
+<body>
+
+    <h2>درخواست های مدیریت هتل من</h2>
+
+    {% for item in requests %}
+
+        <hr>
+
+        <p>هتل: {{ item.hotel.name }}</p>
+
+        <p>تاریخ درخواست: {{ item.created_at }}</p>
+
+        <p>وضعیت: {{ item.get_status_display }}</p>
+
+        <p>توضیحات مدیر کل: {{ item.admin_note }}</p>
+
+    {% empty %}
+
+        <p>هنوز درخواستی ثبت نکرده اید.</p>
+
+    {% endfor %}
+
+    <a href="{% url 'accounts:hotel_admin_request' %}">
+        ثبت درخواست جدید
+    </a>
+
+</body>
+</html>

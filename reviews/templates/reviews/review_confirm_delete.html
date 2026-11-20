@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حذف نظر</title>
+</head>
+<body>
+
+    <h2>حذف نظر</h2>
+
+    <p>آیا از حذف نظر خود اطمینان دارید؟</p>
+
+    <p>{{ object.comment }}</p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <button type="submit">بله، حذف شود</button>
+
+        <a href="{% url 'reviews:review_list' object.hotel.pk %}">
+            انصراف
+        </a>
+
+    </form>
+
+</body>
+</html>

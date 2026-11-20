@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اطلاعات اتاق</title>
+</head>
+<body>
+
+    <h2>اطلاعات نوع اتاق</h2>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            ذخیره اطلاعات
+        </button>
+
+    </form>
+
+    <a href="{% url 'rooms:room_list' %}">
+        بازگشت
+    </a>
+
+</body>
+</html>

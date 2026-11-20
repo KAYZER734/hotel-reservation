@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>درخواست مدیریت هتل</title>
+</head>
+<body>
+
+    <h2>ثبت درخواست مدیریت هتل</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">ثبت درخواست</button>
+    </form>
+
+    <a href="{% url 'accounts:profile' %}">
+        بازگشت
+    </a>
+
+</body>
+</html>

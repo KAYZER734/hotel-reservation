@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جست وجوی اتاق</title>
+</head>
+<body>
+
+    <h2>جست وجوی اتاق</h2>
+
+    <form method="get">
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            جست وجو
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h3>نتایج جست وجو</h3>
+
+    {% for room in rooms %}
+
+        <hr>
+
+        <h3>{{ room.title }}</h3>
+
+        <p>هتل: {{ room.hotel.name }}</p>
+
+        <p>شهر: {{ room.hotel.city }}</p>
+
+        <p>ظرفیت: {{ room.capacity }} نفر</p>
+
+        <p>قیمت هر شب: {{ room.price_per_night }}</p>
+
+        <p>امکانات: {{ room.features }}</p>
+
+        {% if room.available_quantity != None %}
+
+            <p>
+                تعداد اتاق آزاد:
+                {{ room.available_quantity }}
+            </p>
+
+        {% endif %}
+
+        <a href="{% url 'rooms:room_detail' room.pk %}">
+            مشاهده جزئیات
+        </a>
+
+    {% empty %}
+
+        <p>اتاقی با مشخصات موردنظر پیدا نشد.</p>
+
+    {% endfor %}
+
+</body>
+</html>

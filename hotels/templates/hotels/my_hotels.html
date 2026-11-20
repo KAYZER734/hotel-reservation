@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>هتل های من</title>
+</head>
+<body>
+
+    <h2>هتل های تحت مدیریت من</h2>
+
+    {% for hotel in hotels %}
+
+        <hr>
+
+        <h3>{{ hotel.name }}</h3>
+
+        <p>شهر: {{ hotel.city }}</p>
+
+        <p>آدرس: {{ hotel.address }}</p>
+
+        <a href="{% url 'hotels:hotel_detail' hotel.pk %}">
+            مشاهده جزئیات هتل
+        </a>
+
+        <a href="{% url 'discounts:discount_list' hotel.pk %}">
+            مدیریت کدهای تخفیف
+        </a>
+
+    {% empty %}
+
+        <p>شما مدیریت هیچ هتلی را بر عهده ندارید.</p>
+
+    {% endfor %}
+
+</body>
+</html>
