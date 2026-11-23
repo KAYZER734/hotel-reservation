@@ -34,4 +34,5 @@ urlpatterns = [
     # حذف اتاق
     path( '<int:pk>/delete/', RoomDeleteView.as_view(), name='room_delete' ),
 
+    path( 'hotel/<int:hotel_pk>/', RoomListView.as_view(), name='hotel_rooms' ),
 ]

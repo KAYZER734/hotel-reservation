@@ -18,12 +18,28 @@ from .forms import (
 )
 
 
+
 # نمایش فهرست هتل ها
 class HotelListView(ListView):
 
     model = Hotel
     template_name = 'hotels/hotel_list.html'
     context_object_name = 'hotels'
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+
+        context['is_hotel_admin'] = False
+
+        if self.request.user.is_authenticated:
+
+            context['is_hotel_admin'] = HotelAdmin.objects.filter(
+                user=self.request.user,
+                is_active=True
+            ).exists()
+
+        return context
 
 
 # نمایش جزئیات یک هتل

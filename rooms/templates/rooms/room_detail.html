@@ -21,6 +21,14 @@
 
     <p>تعداد کل اتاق ها: {{ room.quantity }}</p>
 
+    <br>
+
+    <a href="{% url 'bookings:booking_create' room_type_pk=room.pk %}">
+        رزرو اتاق
+    </a>
+
+    <br>
+
     <a href="{% url 'rooms:room_update' room.pk %}">
         ویرایش اتاق
     </a>

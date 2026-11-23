@@ -8,6 +8,7 @@ from .views import (
     BookingCancelView,
     ManagerBookingListView,
     ManagerBookingStatusUpdateView,
+    MyManagedHotelsBookingListView
 )
 
 app_name = 'bookings'
@@ -32,4 +33,6 @@ urlpatterns = [
     # تغییر وضعیت رزرو
     path( 'hotel/<int:hotel_pk>/<int:pk>/status/', ManagerBookingStatusUpdateView.as_view(), name='booking_status_update' ),
 
+    # رزروهای تمام هتل‌های تحت مدیریت کاربر
+    path( 'my-hotels/', MyManagedHotelsBookingListView.as_view(), name='my_manager_bookings' ),
 ]

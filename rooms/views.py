@@ -51,6 +51,34 @@ class RoomListView(ListView):
 
     context_object_name = 'rooms'
 
+    def get_queryset(self):
+
+        queryset = RoomType.objects.select_related('hotel')
+
+        hotel_pk = self.kwargs.get('hotel_pk')
+
+        if hotel_pk:
+
+            self.hotel = get_object_or_404(
+                Hotel,
+                pk=hotel_pk
+            )
+
+            queryset = queryset.filter(
+                hotel=self.hotel
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+
+        if hasattr(self, 'hotel'):
+            context['hotel'] = self.hotel
+
+        return context
+
 
 # نمایش جزئیات اتاق
 class RoomDetailView(DetailView):

@@ -6,7 +6,7 @@ from django.views.generic import (
     UpdateView,
     View,
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -147,6 +147,37 @@ class ManagerBookingListView(LoginRequiredMixin, ListView):
         return Booking.objects.filter(
             room_type__hotel=self.hotel_admin.hotel
         )
+
+
+# مشاهده رزروهای تمام هتل‌های تحت مدیریت کاربر
+class MyManagedHotelsBookingListView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    ListView
+):
+
+    model = Booking
+    template_name = 'bookings/manager_booking_list.html'
+    context_object_name = 'bookings'
+
+    # بررسی اینکه کاربر حداقل مدیر یک هتل فعال باشد
+    def test_func(self):
+        return HotelAdmin.objects.filter(
+            user=self.request.user,
+            is_active=True
+        ).exists()
+
+    # نمایش رزروهای تمام هتل‌های تحت مدیریت کاربر
+    def get_queryset(self):
+
+        return Booking.objects.filter(
+            room_type__hotel__administrators__user=self.request.user,
+            room_type__hotel__administrators__is_active=True
+        ).select_related(
+            'user',
+            'room_type',
+            'room_type__hotel'
+        ).distinct()
 
 
 # تغییر وضعیت رزرو توسط مدیر هتل

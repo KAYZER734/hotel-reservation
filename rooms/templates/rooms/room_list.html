@@ -7,7 +7,15 @@
 </head>
 <body>
 
-    <h2>فهرست انواع اتاق</h2>
+    {% if hotel %}
+
+        <h2>اتاق های هتل {{ hotel.name }}</h2>
+
+    {% else %}
+
+        <h2>فهرست انواع اتاق</h2>
+
+    {% endif %}
 
     <a href="{% url 'rooms:room_search' %}">
         جست وجوی اتاق

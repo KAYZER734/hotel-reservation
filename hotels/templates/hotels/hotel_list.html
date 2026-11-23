@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -6,6 +5,73 @@
     <title>فهرست هتل ها</title>
 </head>
 <body>
+
+    {% if user.is_authenticated %}
+
+        <p>خوش آمدید {{ user.username }}</p>
+
+        <details>
+            <summary>☰ منوی حساب کاربری</summary>
+
+            <br>
+
+            <a href="{% url 'accounts:profile' %}">
+                مشاهده پروفایل
+            </a>
+
+            <br><br>
+
+            <a href="{% url 'accounts:profile_edit' %}">
+                ویرایش حساب کاربری
+            </a>
+
+            <br><br>
+
+            <a href="{% url 'bookings:my_bookings' %}">
+                رزروهای من
+            </a>
+
+            <br><br>
+
+            {% if is_hotel_admin %}
+
+                <a href="{% url 'accounts:my_requests' %}">
+                    درخواست های من
+                </a>
+
+                <br><br>
+
+                <a href="{% url 'hotels:my_hotels' %}">
+                    هتل های من
+                </a>
+
+                <br><br>
+
+                <a href="{% url 'bookings:my_manager_bookings' %}">
+                    رزروهای هتل های من
+                </a>
+                <br><br>
+
+            {% endif %}
+
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button type="submit">
+                    خروج از حساب کاربری
+                </button>
+            </form>
+
+        </details>
+
+    {% else %}
+
+        <a href="{% url 'accounts:login' %}">
+            ورود به حساب کاربری
+        </a>
+
+    {% endif %}
+
+    <hr>
 
     <h2>فهرست هتل ها</h2>
 
